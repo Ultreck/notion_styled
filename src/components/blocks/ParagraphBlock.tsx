@@ -1,7 +1,7 @@
 
 import React, { memo, useState, useCallback, useRef, useEffect } from 'react';
 import { useEditorSelector } from '../../contexts/EditorContext';
-import { Block } from '../../types/editorTypes';
+import { Block } from '../../types/EditorTypes';
 
 interface ParagraphBlockProps {
   block: Block;
