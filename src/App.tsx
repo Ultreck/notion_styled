@@ -1,5 +1,4 @@
 
-import React from 'react';
 import { EditorProvider } from './contexts/EditorContext';
 import { UIProvider } from './contexts/UIContext';
 import Editor from './components/Editor/Editor';
