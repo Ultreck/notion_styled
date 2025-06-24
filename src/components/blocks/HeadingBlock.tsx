@@ -1,14 +1,16 @@
 
 import React, { memo, useState, useCallback, useRef, useEffect } from 'react';
 import { useEditorSelector } from '../../contexts/EditorContext';
-import { Block } from '../../types/editorTypes';
+import { Block } from '../../types/EditorTypes';
 
 interface HeadingBlockProps {
   block: Block;
 }
 
 const HeadingBlock: React.FC<HeadingBlockProps> = memo(({ block }) => {
-  const updateBlock = useEditorSelector(state => state.updateBlock);
+const updateBlock: (id: string, changes: Partial<Block>) => void = useEditorSelector(
+    (state: { updateBlock: (id: string, changes: Partial<Block>) => void }) => state.updateBlock
+);
   const [isEditing, setIsEditing] = useState(false);
   const [content, setContent] = useState(block.content);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
