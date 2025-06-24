@@ -2,7 +2,7 @@
 import React, { memo } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Block } from '../../types/editorTypes';
+import { Block } from '../../types/EditorTypes';
 import HeadingBlock from './HeadingBlock';
 import ParagraphBlock from './ParagraphBlock';
 import ImageBlock from './ImageBlock';
