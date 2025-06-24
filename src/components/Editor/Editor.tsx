@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
@@ -6,8 +5,8 @@ import { useEditor } from '../../contexts/EditorContext';
 import SortableBlock from '../blocks/SortableBlock';
 
 const Editor: React.FC = () => {
-  const { state, moveBlock } = useEditor();
-  const blocks = state.blocks;
+  const { state, moveBlock, getCurrentPageBlocks } = useEditor();
+  const blocks = getCurrentPageBlocks();
   
   const sensors = useSensors(
     useSensor(PointerSensor),
