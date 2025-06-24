@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useEditor } from '../contexts/EditorContext';
-import { Block } from '../types/editorTypes';
+import { Block } from '../types/EditorTypes';
 
 const Toolbar: React.FC = () => {
   const { addBlock } = useEditor();
