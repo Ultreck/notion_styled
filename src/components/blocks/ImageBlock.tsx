@@ -1,14 +1,16 @@
 
 import React, { memo, useState, useCallback } from 'react';
-import { useEditorSelector } from '../../contexts/EditorContext';
-import { Block } from '../../types/editorTypes';
+import { useEditorSelector } from '../../contexts//EditorContext';
+import { Block } from '../../types/EditorTypes';
 
 interface ImageBlockProps {
   block: Block;
 }
 
 const ImageBlock: React.FC<ImageBlockProps> = memo(({ block }) => {
-  const updateBlock = useEditorSelector(state => state.updateBlock);
+const updateBlock: (id: string, updates: Partial<Block>) => void = useEditorSelector(
+    (state: { updateBlock: (id: string, updates: Partial<Block>) => void }) => state.updateBlock
+);
   const [isEditing, setIsEditing] = useState(!block.metadata?.imageUrl);
   const [imageUrl, setImageUrl] = useState(block.metadata?.imageUrl || '');
   const [imageError, setImageError] = useState(false);
