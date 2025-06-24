@@ -7,9 +7,23 @@ interface BlockControlsProps {
 }
 
 const BlockControls: React.FC<BlockControlsProps> = memo(({ blockId }) => {
-  const deleteBlock = useEditorSelector(state => state.deleteBlock);
-  const addBlock = useEditorSelector(state => state.addBlock);
-  const blocks = useEditorSelector(state => state.state.blocks);
+const deleteBlock: (blockId: string) => void = useEditorSelector((state: EditorState) => state.deleteBlock);
+
+interface EditorState {
+    addBlock: (type: 'heading' | 'paragraph' | 'image' | 'video', order: number) => void;
+    deleteBlock: (blockId: string) => void;
+    state: {
+        blocks: Block[];
+    };
+}
+
+interface Block {
+    id: string;
+    order: number;
+    // add other block properties if needed
+}
+const addBlock: (type: 'heading' | 'paragraph' | 'image' | 'video', order: number) => void = useEditorSelector((state: EditorState) => state.addBlock);
+const blocks: Block[] = useEditorSelector((state: EditorState) => state.state.blocks);
   const [showMenu, setShowMenu] = useState(false);
 
   const currentBlock = blocks.find(b => b.id === blockId);
