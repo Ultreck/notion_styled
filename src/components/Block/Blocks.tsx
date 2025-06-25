@@ -1,11 +1,16 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { useEditor, Block as BlockType } from '../../contexts/EditorContext';
+import { useEditor } from '../../contexts/EditorContext';
+import { Block } from '../../types/editorTypes';
 import { useUI } from '../../contexts/UIContext';
 
-// interface BlockProps {
-//   block: BlockType;
-// }
+export type BlockType = {
+  id: string;
+  type: 'paragraph' | 'heading1' | 'heading2' | 'heading3' | 'bulletList' | 'numberedList' | 'quote' | 'code' | 'image' | 'video';
+  content: string;
+  order: number;
+  pageId: string;
+};
 
 const Blocks = ({ block }: { block: BlockType }) => {
   const editor = useEditor();
@@ -48,7 +53,8 @@ const Blocks = ({ block }: { block: BlockType }) => {
         id: Date.now().toString(),
         type: 'paragraph',
         content: '',
-        order: block.order + 1
+        order: block.order + 1,
+        pageId: block.pageId
       };
       if (editor.addBlock) {
         editor.addBlock('paragraph', block.order + 1);
