@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { useEditor, Block } from '../../contexts/EditorContext';
+import { useEditor } from '../../contexts/EditorContext';
+import { Block } from '../../types/editorTypes';
 import { useUI } from '../../contexts/UIContext';
 import './BlockMenu.css';
 
@@ -13,13 +14,13 @@ interface BlockType {
 
 const blockTypes: BlockType[] = [
   { type: 'paragraph', label: 'Text', icon: '📝', description: 'Just start writing with plain text.' },
-  { type: 'heading1', label: 'Heading 1', icon: 'H1', description: 'Big section heading.' },
-  { type: 'heading2', label: 'Heading 2', icon: 'H2', description: 'Medium section heading.' },
-  { type: 'heading3', label: 'Heading 3', icon: 'H3', description: 'Small section heading.' },
-  { type: 'bulletList', label: 'Bulleted list', icon: '•', description: 'Create a simple bulleted list.' },
-  { type: 'numberedList', label: 'Numbered list', icon: '1.', description: 'Create a list with numbering.' },
-  { type: 'quote', label: 'Quote', icon: '❝', description: 'Capture a quote.' },
-  { type: 'code', label: 'Code', icon: '{ }', description: 'Capture a code snippet.' },
+  { type: 'heading', label: 'Heading 1', icon: 'H1', description: 'Big section heading.' },
+  { type: 'heading', label: 'Heading 2', icon: 'H2', description: 'Medium section heading.' },
+  { type: 'heading', label: 'Heading 3', icon: 'H3', description: 'Small section heading.' },
+//   { type: 'bulletList', label: 'Bulleted list', icon: '•', description: 'Create a simple bulleted list.' },
+//   { type: 'numberedList', label: 'Numbered list', icon: '1.', description: 'Create a list with numbering.' },
+//   { type: 'quote', label: 'Quote', icon: '❝', description: 'Capture a quote.' },
+//   { type: 'code', label: 'Code', icon: '{ }', description: 'Capture a code snippet.' },
 ];
 
 const BlockMenu: React.FC = () => {
@@ -30,8 +31,8 @@ const BlockMenu: React.FC = () => {
 
   const handleBlockTypeSelect = (type: Block['type']) => {
     dispatch({
-      type: 'CHANGE_BLOCK_TYPE',
-      payload: { id: selectedBlockId, newType: type }
+      type: 'UPDATE_BLOCK',
+      payload: { id: selectedBlockId, updates: { type } }
     });
     hideBlockMenu();
   };

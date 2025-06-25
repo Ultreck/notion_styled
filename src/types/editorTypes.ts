@@ -40,6 +40,7 @@ export type EditorAction =
 
 export interface EditorContextType {
   state: EditorState;
+  dispatch: React.Dispatch<EditorAction>;
   addBlock: (type: Block['type'], index?: number) => void;
   updateBlock: (id: string, updates: Partial<Block>) => void;
   deleteBlock: (id: string) => void;

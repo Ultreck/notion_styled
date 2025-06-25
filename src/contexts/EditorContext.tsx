@@ -262,6 +262,7 @@ export const EditorProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
   const contextValue = useMemo(() => ({
     state,
+    dispatch,
     addBlock,
     updateBlock,
     deleteBlock,
