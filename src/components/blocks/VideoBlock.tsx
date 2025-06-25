@@ -2,7 +2,7 @@
 import React, { memo, useState, useCallback } from 'react';
 import ReactPlayer from 'react-player/youtube';
 import { useEditorSelector } from '../../contexts/EditorContext';
-import { Block } from '../../types/EditorTypes';
+import { Block } from '../../types/editorTypes';
 
 interface VideoBlockProps {
   block: Block;
