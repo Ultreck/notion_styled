@@ -49,7 +49,7 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <aside className="sidebar">
+    <aside className="sidebar fixed">
       <div className="sidebar-header">
         <h2>Workspace</h2>
         <button className="sidebar-toggle" onClick={toggleSidebar}>

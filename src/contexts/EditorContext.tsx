@@ -1,7 +1,7 @@
 
 
 import React, { createContext, useContext, useReducer, ReactNode, useMemo, useCallback } from 'react';
-import { Block, Page, EditorState, EditorAction, EditorContextType } from '../types/EditorTypes';
+import { Block, Page, EditorState, EditorAction, EditorContextType } from '../types/editorTypes';
 
 const defaultPageId = 'default-page-1';
 

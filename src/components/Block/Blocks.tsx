@@ -3,12 +3,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useEditor, Block as BlockType } from '../../contexts/EditorContext';
 import { useUI } from '../../contexts/UIContext';
 
-interface BlockProps {
-  block: BlockType;
-}
+// interface BlockProps {
+//   block: BlockType;
+// }
 
-const Blocks: React.FC<BlockProps> = ({ block }) => {
-  const { dispatch } = useEditor();
+const Blocks = ({ block }: { block: BlockType }) => {
+  const editor = useEditor();
   const { showBlockMenuAt } = useUI();
   const [isEditing, setIsEditing] = useState(false);
   const [content, setContent] = useState(block.content);
@@ -32,10 +32,9 @@ const Blocks: React.FC<BlockProps> = ({ block }) => {
   const handleBlur = () => {
     setIsEditing(false);
     if (content !== block.content) {
-      dispatch({
-        type: 'UPDATE_BLOCK',
-        payload: { id: block.id, content }
-      });
+      if (editor.updateBlock) {
+        editor.updateBlock(block.id, { content });
+      }
     }
   };
 
@@ -43,7 +42,7 @@ const Blocks: React.FC<BlockProps> = ({ block }) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleBlur();
-      
+
       // Create new block
       const newBlock: BlockType = {
         id: Date.now().toString(),
@@ -51,17 +50,13 @@ const Blocks: React.FC<BlockProps> = ({ block }) => {
         content: '',
         order: block.order + 1
       };
-      
-      dispatch({
-        type: 'ADD_BLOCK',
-        payload: { block: newBlock, afterId: block.id }
-      });
+      if (editor.addBlock) {
+        editor.addBlock('paragraph', block.order + 1);
+      }
     }
-  };
-
-  const handleContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
-    showBlockMenuAt(e.clientX, e.clientY, block.id);
+    // Optionally, trigger the block menu in another way for keyboard events, or remove this line.
+    // showBlockMenuAt(e.clientX, e.clientY, block.id); // Removed because clientX/clientY are not available on KeyboardEvent
   };
 
   const getPlaceholder = () => {
@@ -128,6 +123,14 @@ const Blocks: React.FC<BlockProps> = ({ block }) => {
       case 'quote': return 'text-base border-l-4 border-gray-300 pl-4 italic';
       case 'code': return 'text-base font-mono bg-gray-100 px-1 rounded';
       default: return 'text-base my-0';
+    }
+  };
+
+  // Add the missing handleContextMenu function
+  const handleContextMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (showBlockMenuAt) {
+      showBlockMenuAt(e.clientX, e.clientY, block.id);
     }
   };
 
